@@ -13,8 +13,7 @@ import {
 } from 'react-native';
 import ScrollableTabView,{ScrollableTabBar} from 'react-native-scrollable-tab-view';
 
-import Header from '../../Header/Header';
-//import NewsView from './News/NewsView';
+import Header from '../../common/Header/Header';
 import NewsLists from './News/NewsLists';
 import NewsDetail from './News/NewsDetail';
 
@@ -43,7 +42,7 @@ export default class HomeNav extends Component {
 		        <Header />
 		        <ScrollableTabView
 			        renderTabBar={() => <ScrollableTabBar/>}>
-			        <NewsLists tabLabel='推荐'  onPress={this._pressButton.bind(this)} />
+			        <NewsLists tabLabel='推荐'  onPressDetails={this._pressButton.bind(this)} />
 			        <Text tabLabel='Tab2'/>
 			        <Text tabLabel='Tab3'/>
 			        <Text tabLabel='Tab4'/>

@@ -15,8 +15,9 @@ import {
 import TabNavigator from 'react-native-tab-navigator';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import HomeView from '../common/Scene/home/HomeView';
-import VideoHome from '../common/Scene/Video/VideoHome';
+import HomeView from './home/HomeView';
+import VideoHome from './Video/VideoHome';
+import AccountsHome from './Accounts/AccountsHome';
 //import HomePage from '../common/Scene/home/HomePage ';
 
 const HOME = '主页';
@@ -74,11 +75,11 @@ export default class TabBar extends Component {
 		return (
 			<View style={{flex: 1}}>
 				<TabNavigator hidesTabTouch={true} tabBarStyle={styles.tab}>
-					{this._renderTabItem(HOME_NORMAL, HOME_FOCUS, HOME, <HomeView nav={this.props.nav}/>)}
-					{this._renderTabItem(CATEGORY_NORMAL, CATEGORY_FOCUS, CATEGORY, <VideoHome nav={this.props.nav}/>)}
+					{this._renderTabItem(HOME_NORMAL, HOME_FOCUS, HOME, <HomeView nav={this.props.nav} />)}
+					{this._renderTabItem(CATEGORY_NORMAL, CATEGORY_FOCUS, CATEGORY, <VideoHome nav={this.props.nav} />)}
 					{this._renderTabItem(FAXIAN_NORMAL, FAXIAN_FOCUS, FAXIAN, TabBar._createChildView(FAXIAN))}
 					{this._renderTabItem(CART_NORMAL, CART_FOCUS, CART, TabBar._createChildView(CART))}
-					{this._renderTabItem(PERSONAL_NORMAL, PERSONAL_FOCUS, PERSONAL, TabBar._createChildView(PERSONAL))}
+					{this._renderTabItem(PERSONAL_NORMAL, PERSONAL_FOCUS, PERSONAL, <AccountsHome nav={this.props.nav} /> )}
 				</TabNavigator>
 			</View >
 		);

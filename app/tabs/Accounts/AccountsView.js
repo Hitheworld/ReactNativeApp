@@ -14,9 +14,9 @@ import {
 	Text
 } from 'react-native';
 
-import NewsLists from './NewsLists';
+import AccountsHome from './AccountsHome';
 
-export default class NewsView extends Component {
+export default class AccountsView extends Component {
 
 	constructor(props) {
 		super(props);
@@ -32,8 +32,8 @@ export default class NewsView extends Component {
 	}
 
 	render() {
-		let defaultName = 'NewsLists';
-		let defaultComponent = NewsLists;
+		let defaultName = 'AccountsHome';
+		let defaultComponent = AccountsHome;
 		return (
 			<Navigator
 				initialRoute={{ name: defaultName, component: defaultComponent }}

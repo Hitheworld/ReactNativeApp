@@ -6,6 +6,7 @@ import {
 	ActivityIndicator,
 	ProgressBarAndroid,
 	ProgressViewIOS,
+	TouchableHighlight,
 	Navigator,
 	PixelRatio,
     Dimensions,
@@ -42,7 +43,6 @@ export default class NewsLists extends Component {
             dataSource1: dataSource.cloneWithPages(BANNER_IMGS),
 			dataSource: ds,
 			loaded: false,
-			//dataSource: ds.cloneWithRows([ this._fetchListData() ])
 		};
 	}
 
@@ -60,6 +60,9 @@ export default class NewsLists extends Component {
 				});
 			})
 			.catch((error) => {
+				this.setState({
+					data: true,
+				});
 				console.error(error);
 		});
 	}
@@ -72,25 +75,25 @@ export default class NewsLists extends Component {
         );
     }
 
-	//_pressButton() {
-	//	const { navigator } = this.props;
-	//	//为什么这里可以取得 props.navigator?请看上文:
-	//	//<Component {...route.params} navigator={navigator} />
-	//	//这里传递了navigator作为props
-	//	if(navigator) {
-	//		navigator.push({
-	//			name: 'NewsDetail',
-	//			component: NewsDetail,
-	//		})
-	//	}
-	//}
+	_Reload() {
+		this._fetchListData();
+	}
 
 	render() {
 		if (!this.state.loaded) {
 			return this.renderLoadingView();
 		}
 
-		let onPress = this.props.onPress;
+		if (!this.state.data) {
+			return (
+				<TouchableHighlight style={styles.error} onPress={this._Reload.bind(this)}>
+					<Text>服务器异常!</Text>
+					<Text>轻触屏幕重新加载!</Text>
+				</TouchableHighlight>
+			);
+		}
+
+		let onPress = this.props.onPressDetails;
 
 		return (
 			<ListView dataSource={this.state.dataSource}
@@ -127,6 +130,7 @@ export default class NewsLists extends Component {
 			return (
 				 <View style={styles.containerLoading} >
 					 <ActivityIndicator size="large" />
+					 <Text>努力加载中...</Text>
 				 </View>
 			);
 		}
@@ -167,5 +171,11 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
+	},
+	error: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
+		backgroundColor: '#363336',
 	}
 });
