@@ -13,7 +13,7 @@ import {
 } from 'react-native';
 import ScrollableTabView,{ScrollableTabBar} from 'react-native-scrollable-tab-view';
 
-import Header from '../../common/Header/Header';
+import Header from '../../common/Header';
 import NewsLists from './News/NewsLists';
 import NewsDetail from './News/NewsDetail';
 
@@ -39,7 +39,18 @@ export default class HomeNav extends Component {
     render() {
         return (
 	        <View style={styles.flex}>
-		        <Header />
+		        <Header
+			        title="首页"
+			        style={styles.header}
+			        leftItem={{
+			            icon: require('./images/home_icons/cz.png'),
+			            title: 'Menu',
+			            layout: 'icon',
+			            onPress: () => this.props.navigator.push({
+
+		                }),
+		            }}>
+		        </Header>
 		        <ScrollableTabView
 			        renderTabBar={() => <ScrollableTabBar/>}>
 			        <NewsLists tabLabel='推荐'  onPressDetails={this._pressButton.bind(this)} />
@@ -64,4 +75,15 @@ const styles = StyleSheet.create({
 	flex: {
 		flex: 1,
 	},
+	header: {
+		backgroundColor: '#47BFBF',
+	},
+	//head: {
+	//	flex: 1,
+	//	flexDirection: 'row',
+	//	alignItems: 'center',
+	//},
+	//homeHead: {
+	//	textAlign: 'center',
+	//}
 });
