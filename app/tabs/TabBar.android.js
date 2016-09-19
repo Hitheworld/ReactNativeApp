@@ -15,8 +15,7 @@ import {
 import TabNavigator from 'react-native-tab-navigator';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import Header from '../common/Header/Header';
-import HomeNav from '../common/Scene/home/HomeNav';
+import HomeView from '../common/Scene/home/HomeView';
 import VideoHome from '../common/Scene/Video/VideoHome';
 //import HomePage from '../common/Scene/home/HomePage ';
 
@@ -74,9 +73,8 @@ export default class TabBar extends Component {
 	render() {
 		return (
 			<View style={{flex: 1}}>
-				<Header />
 				<TabNavigator hidesTabTouch={true} tabBarStyle={styles.tab}>
-					{this._renderTabItem(HOME_NORMAL, HOME_FOCUS, HOME, <HomeNav nav={this.props.nav}/>)}
+					{this._renderTabItem(HOME_NORMAL, HOME_FOCUS, HOME, <HomeView nav={this.props.nav}/>)}
 					{this._renderTabItem(CATEGORY_NORMAL, CATEGORY_FOCUS, CATEGORY, <VideoHome nav={this.props.nav}/>)}
 					{this._renderTabItem(FAXIAN_NORMAL, FAXIAN_FOCUS, FAXIAN, TabBar._createChildView(FAXIAN))}
 					{this._renderTabItem(CART_NORMAL, CART_FOCUS, CART, TabBar._createChildView(CART))}

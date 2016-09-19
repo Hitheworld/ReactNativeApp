@@ -18,7 +18,7 @@ import {
 import ViewPager from 'react-native-viewpager';
 
 import News from './News';
-import NewsDetail from './NewsDetail';
+//import NewsDetail from './NewsDetail';
 
 const REQUEST_URL = 'http://www.toutiao.com/api/article/feed/?category=__all__&utm_source=toutiao&max_behot_time=0&max_behot_time_tmp=0&as=A115978D586AAFF&cp=57D83ADA5FAF1E1';
 
@@ -72,47 +72,47 @@ export default class NewsLists extends Component {
         );
     }
 
-	_pressButton() {
-		const { navigator } = this.props;
-		//为什么这里可以取得 props.navigator?请看上文:
-		//<Component {...route.params} navigator={navigator} />
-		//这里传递了navigator作为props
-		if(navigator) {
-			navigator.push({
-				name: 'NewsDetail',
-				component: NewsDetail,
-			})
-		}
-	}
+	//_pressButton() {
+	//	const { navigator } = this.props;
+	//	//为什么这里可以取得 props.navigator?请看上文:
+	//	//<Component {...route.params} navigator={navigator} />
+	//	//这里传递了navigator作为props
+	//	if(navigator) {
+	//		navigator.push({
+	//			name: 'NewsDetail',
+	//			component: NewsDetail,
+	//		})
+	//	}
+	//}
 
 	render() {
 		if (!this.state.loaded) {
 			return this.renderLoadingView();
 		}
 
+		let onPress = this.props.onPress;
+
 		return (
-			<View style={styles.flex}>
-				<ListView dataSource={this.state.dataSource}
-				           renderRow={(rowData) =>
-				                <View style={styles.listContainer}>
-									<News datadb={rowData}  onPress={this._pressButton.bind(this)} />
-								</View>
-				           }
-                          renderHeader={()=>{
-                          return(
-                            <View>
-                                <ViewPager
-                                    style={styles.banner}
-                                    dataSource={this.state.dataSource1}
-                                    renderPage={this._renderPage}
-                                    isLoop={true}
-                                    autoPlay={true}/>
-                            </View>
-                            )}
-                       }
-				           style={styles.container}>
-				</ListView >
-			</View>
+			<ListView dataSource={this.state.dataSource}
+			           renderRow={(rowData) =>
+			                <View style={styles.listContainer}>
+								<News datadb={rowData}   onPress={onPress} />
+							</View>
+			           }
+                      renderHeader={()=>{
+                      return(
+                        <View>
+                            <ViewPager
+                                style={styles.banner}
+                                dataSource={this.state.dataSource1}
+                                renderPage={this._renderPage}
+                                isLoop={true}
+                                autoPlay={true}/>
+                        </View>
+                        )}
+                   }
+			           style={styles.container}>
+			</ListView >
 		)
 	}
 
