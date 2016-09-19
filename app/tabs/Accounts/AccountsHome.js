@@ -40,68 +40,124 @@ export default class AccountsHome extends Component {
 				backgroundColor="blue"
 				contentBackgroundColor="pink"
 				parallaxHeaderHeight={300}
+				renderBackground={() => (
+	                <View key="background">
+		                <Image source={{uri: 'https://i.ytimg.com/vi/P-NZei5ANaQ/maxresdefault.jpg',
+		                                width: window.width,
+		                                height: PARALLAX_HEADER_HEIGHT}}/>
+		                <View style={{position: 'absolute',
+		                              top: 0,
+		                              width: window.width,
+		                              backgroundColor: 'rgba(0,0,0,.4)',
+		                              height: PARALLAX_HEADER_HEIGHT}}/>
+	                </View>
+	            )}
 				renderForeground={() => (
-			       <View style={{ height: 300, flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-			          <Text>Hello World!</Text>
-			        </View>
-			      )}>
-				<View style={{ height: 500 }}>
-					<Text>Scroll me</Text>
-				</View>
+	              <View key="parallax-header" style={ styles.parallaxHeader }>
+	                <Image style={ styles.avatar } source={{
+	                  uri: 'https://pbs.twimg.com/profile_images/2694242404/5b0619220a92d391534b0cd89bf5adc1_400x400.jpeg',
+	                  width: AVATAR_SIZE,
+	                  height: AVATAR_SIZE
+	                }}/>
+	                <Text style={ styles.sectionSpeakerText }>
+	                  Talks by Rich Hickey
+	                </Text>
+	                <Text style={ styles.sectionTitleText }>
+	                  CTO of Cognitec, Creator of Clojure
+	                </Text>
+	              </View>
+                )}
+
+				renderStickyHeader={() => (
+	              <View key="sticky-header" style={styles.stickySection}>
+	                <Text style={styles.stickySectionText}>Rich Hickey Talks</Text>
+	              </View>
+                )}
+
+				renderFixedHeader={() => (
+	              <View key="fixed-header" style={styles.fixedSection}>
+	                <Text style={styles.fixedSectionText}
+	                      onPress={() => this.refs.ListView.scrollTo({ x: 0, y: 0 })}>
+	                  Scroll to top
+	                </Text>
+	              </View>
+                )}>
+
 			</ParallaxScrollView>
 		)
 	}
 
-	renderLoadingView() {
-		if(Platform.OS === 'ios'){
-			return (
-				<View style={styles.containerLoading} >
-					<ProgressViewIOS  progressTintColor="yellow" progress={this.getProgress(0.8)} />
-				</View>
-			);
-		}else if(Platform.OS === 'android'){
-			return (
-				<View style={styles.containerLoading} >
-					<ActivityIndicator size="large" />
-				</View>
-			);
-		}
-	}
-
-	//ios
-	getProgress(offset) {
-		var progress = this.state.progress + offset;
-		return Math.sin(progress % Math.PI) % 1;
-	}
-
 }
 
+const window = Dimensions.get('window');
+
+const AVATAR_SIZE = 120;
+const ROW_HEIGHT = 60;
+const PARALLAX_HEADER_HEIGHT = 350;
+const STICKY_HEADER_HEIGHT = 70;
+
 const styles = StyleSheet.create({
-	flex: {
-		flex: 1,
-		backgroundColor: 'rgba(243,243,243,1)',
-	},
 	container: {
 		flex: 1,
+		backgroundColor: 'black'
 	},
-	listContainer: {
-		flex: 1,
-		marginTop: 10,
-		borderTopColor: 'rgba(255,255,255,1)',
-		borderTopWidth: 2/PixelRatio.get(),
+	background: {
+		position: 'absolute',
+		top: 0,
+		left: 0,
+		width: window.width,
+		height: PARALLAX_HEADER_HEIGHT
 	},
-	banner: {
-		height:130
+	stickySection: {
+		height: STICKY_HEADER_HEIGHT,
+		width: 300,
+		justifyContent: 'flex-end'
 	},
-	bannerImage: {
-		flex: 1,
-		width: Dimensions.get('window').width,
-		height: (Dimensions.get('window').width)*0.3582,
-		resizeMode: 'stretch'
+	stickySectionText: {
+		color: 'white',
+		fontSize: 20,
+		margin: 10
 	},
-	containerLoading: {
-		flex: 1,
-		justifyContent: 'center',
+	fixedSection: {
+		position: 'absolute',
+		bottom: 10,
+		right: 10
+	},
+	fixedSectionText: {
+		color: '#999',
+		fontSize: 20
+	},
+	parallaxHeader: {
 		alignItems: 'center',
+		flex: 1,
+		flexDirection: 'column',
+		paddingTop: 100
+	},
+	avatar: {
+		marginBottom: 10,
+		borderRadius: AVATAR_SIZE / 2
+	},
+	sectionSpeakerText: {
+		color: 'white',
+		fontSize: 24,
+		paddingVertical: 5
+	},
+	sectionTitleText: {
+		color: 'white',
+		fontSize: 18,
+		paddingVertical: 5
+	},
+	row: {
+		overflow: 'hidden',
+		paddingHorizontal: 10,
+		height: ROW_HEIGHT,
+		backgroundColor: 'white',
+		borderColor: '#ccc',
+		borderBottomWidth: 1,
+		justifyContent: 'center'
+	},
+	rowText: {
+		fontSize: 20
 	}
+
 });
