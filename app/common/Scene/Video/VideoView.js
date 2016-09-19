@@ -26,7 +26,8 @@ export default class VideoView extends Component {
 	render() {
 		let data = this.props.datadb;
 		let onPress = this.props.onPress;
-		let pic = this.props.datadb ? {uri: data.image_url} : require('./images/default.png');
+		let img = data.image_url;
+		let pic = this.props.datadb ? {uri: img ? img : 'https://facebook.github.io/react/img/logo_og.png'} : require('./images/default.png');
 		return (
 			<TouchableWithoutFeedback  underlayColor='rgba(34,26,38,0.1)' onPress={onPress}>
 				<View style={styles.itemImageBox}>

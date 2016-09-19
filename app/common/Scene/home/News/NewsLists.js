@@ -3,6 +3,7 @@ import {
 	StyleSheet,
 	Platform,
 	TouchableOpacity,
+	ActivityIndicator,
 	ProgressBarAndroid,
 	ProgressViewIOS,
 	Navigator,
@@ -125,7 +126,7 @@ export default class NewsLists extends Component {
 		}else if(Platform.OS === 'android'){
 			return (
 				 <View style={styles.containerLoading} >
-					 <ProgressBarAndroid styleAttr="LargeInverse" />
+					 <ActivityIndicator size="large" />
 				 </View>
 			);
 		}
@@ -164,6 +165,7 @@ const styles = StyleSheet.create({
     },
 	containerLoading: {
 		flex: 1,
-
+		justifyContent: 'center',
+		alignItems: 'center',
 	}
 });

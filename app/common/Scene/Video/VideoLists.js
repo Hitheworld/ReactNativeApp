@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {
 	StyleSheet,
 	TouchableOpacity,
+	ActivityIndicator,
 	ProgressBarAndroid,
 	Navigator,
 	PixelRatio,
@@ -83,8 +84,8 @@ export default class VideoLists extends Component {
 
 	renderLoadingView() {
 		return (
-			<View style={styles.container} >
-				<ProgressBarAndroid styleAttr="Inverse" />
+			<View style={styles.containerLoading} >
+				<ActivityIndicator size="large" />
 			</View>
 
 		);
@@ -102,5 +103,10 @@ const styles = StyleSheet.create({
 		marginTop: 10,
 		borderTopColor: 'rgba(255,255,255,1)',
 		borderTopWidth: 2/PixelRatio.get(),
+	},
+	containerLoading: {
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center',
 	}
 });
