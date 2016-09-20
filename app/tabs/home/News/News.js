@@ -22,8 +22,6 @@ export default class News extends Component {
 		this.state = {};
 	}
 
-
-
 	render() {
 		let data = this.props.datadb;
 		let onPress = this.props.onPress;

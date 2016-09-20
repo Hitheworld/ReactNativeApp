@@ -5,4 +5,10 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <!--Android状态栏的“沉浸式”设置-->
+    <style name="ImageTranslucentTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+    </style>
+
 </resources>

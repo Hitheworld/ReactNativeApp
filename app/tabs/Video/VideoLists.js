@@ -71,12 +71,13 @@ export default class VideoLists extends Component {
 		return (
 			<View style={styles.flex}>
 				<ListView dataSource={this.state.dataSource}
-				          renderRow={(rowData) =>
-				                <View style={styles.listContainer}>
-									<VideoView datadb={rowData}  onPress={this._pressButton.bind(this)} />
-								</View>
-				           }
-				          style={styles.container}>
+			         renderRow={(rowData) =>
+			              <View style={styles.listContainer}>
+							  <VideoView datadb={rowData}  onPress={this._pressButton.bind(this)} />
+						  </View>
+			         }
+			         style={styles.container}
+			         enableEmptySections={true}>
 				</ListView >
 			</View>
 		)

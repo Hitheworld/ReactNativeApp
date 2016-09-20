@@ -5,6 +5,7 @@ import {
 	ToolbarAndroid,
 	TouchableOpacity,
 	Platform,
+	StatusBar,
 	Navigator,
 	PixelRatio,
 	View,
@@ -49,6 +50,11 @@ class HeaderAndroid extends Component{
 
 		return(
 			<View style={[styles.toolbarContainer, this.props.style]}>
+				<StatusBar
+					backgroundColor="#393a3f"
+					animated={false}
+					translucent={true}
+				/>
 				<ToolbarAndroid
 				    navIcon={leftItem && leftItem.icon}
 				    onIconClicked={leftItem && leftItem.onPress}

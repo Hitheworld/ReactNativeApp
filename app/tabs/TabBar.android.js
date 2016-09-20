@@ -17,7 +17,7 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 
 import HomeView from './home/HomeView';
 import VideoHome from './Video/VideoHome';
-import AccountsHome from './Accounts/AccountsHome';
+import InfoHome from './Info/InfoHome';
 //import HomePage from '../common/Scene/home/HomePage ';
 
 const HOME = '主页';
@@ -79,7 +79,7 @@ export default class TabBar extends Component {
 					{this._renderTabItem(CATEGORY_NORMAL, CATEGORY_FOCUS, CATEGORY, <VideoHome nav={this.props.nav} />)}
 					{this._renderTabItem(FAXIAN_NORMAL, FAXIAN_FOCUS, FAXIAN, TabBar._createChildView(FAXIAN))}
 					{this._renderTabItem(CART_NORMAL, CART_FOCUS, CART, TabBar._createChildView(CART))}
-					{this._renderTabItem(PERSONAL_NORMAL, PERSONAL_FOCUS, PERSONAL, <AccountsHome nav={this.props.nav} /> )}
+					{this._renderTabItem(PERSONAL_NORMAL, PERSONAL_FOCUS, PERSONAL, <InfoHome nav={this.props.nav} /> )}
 				</TabNavigator>
 			</View >
 		);

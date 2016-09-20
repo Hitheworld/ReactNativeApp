@@ -14,9 +14,9 @@ import {
 	Text
 } from 'react-native';
 
-import AccountsHome from './AccountsHome';
+import InfoHome from './InfoHome';
 
-export default class AccountsView extends Component {
+export default class InfoView extends Component {
 
 	constructor(props) {
 		super(props);
@@ -32,8 +32,8 @@ export default class AccountsView extends Component {
 	}
 
 	render() {
-		let defaultName = 'AccountsHome';
-		let defaultComponent = AccountsHome;
+		let defaultName = 'InfoHome';
+		let defaultComponent = InfoHome;
 		return (
 			<Navigator
 				initialRoute={{ name: defaultName, component: defaultComponent }}

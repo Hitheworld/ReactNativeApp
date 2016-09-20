@@ -19,7 +19,6 @@ import {
 import ViewPager from 'react-native-viewpager';
 
 import News from './News';
-//import NewsDetail from './NewsDetail';
 
 const REQUEST_URL = 'http://www.toutiao.com/api/article/feed/?category=__all__&utm_source=toutiao&max_behot_time=0&max_behot_time_tmp=0&as=A115978D586AAFF&cp=57D83ADA5FAF1E1';
 
@@ -60,9 +59,7 @@ export default class NewsLists extends Component {
 				});
 			})
 			.catch((error) => {
-				this.setState({
-					data: true,
-				});
+
 				console.error(error);
 		});
 	}
@@ -84,37 +81,38 @@ export default class NewsLists extends Component {
 			return this.renderLoadingView();
 		}
 
-		if (!this.state.data) {
-			return (
-				<TouchableHighlight style={styles.error} onPress={this._Reload.bind(this)}>
-					<Text>服务器异常!</Text>
-					<Text>轻触屏幕重新加载!</Text>
-				</TouchableHighlight>
-			);
-		}
+		//if (!this.state.data) {
+		//	return (
+		//		<TouchableHighlight style={styles.error} onPress={this._Reload.bind(this)}>
+		//			<Text>服务器异常!</Text>
+		//			<Text>轻触屏幕重新加载!</Text>
+		//		</TouchableHighlight>
+		//	);
+		//}
 
 		let onPress = this.props.onPressDetails;
 
 		return (
 			<ListView dataSource={this.state.dataSource}
-			           renderRow={(rowData) =>
-			                <View style={styles.listContainer}>
-								<News datadb={rowData}   onPress={onPress} />
-							</View>
-			           }
-                      renderHeader={()=>{
-                      return(
-                        <View>
-                            <ViewPager
-                                style={styles.banner}
-                                dataSource={this.state.dataSource1}
-                                renderPage={this._renderPage}
-                                isLoop={true}
-                                autoPlay={true}/>
-                        </View>
-                        )}
-                   }
-			           style={styles.container}>
+		        style={styles.container}
+		        renderRow={(rowData) =>
+		             <View style={styles.listContainer}>
+						 <News datadb={rowData}   onPress={onPress} />
+					 </View>
+		        }
+                renderHeader={()=>{
+                    return(
+                    <View>
+                        <ViewPager
+                            style={styles.banner}
+                            dataSource={this.state.dataSource1}
+                            renderPage={this._renderPage}
+                            isLoop={true}
+                            autoPlay={true}/>
+                    </View>
+                    )}
+                }
+                enableEmptySections={true}>
 			</ListView >
 		)
 	}
