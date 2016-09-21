@@ -30,7 +30,7 @@ export default class HomeNav extends Component {
 		//这里传递了navigator作为props
 		if(navigator) {
 			navigator.push({
-				name: 'NewsDetail',
+				name: '阅读',
 				component: NewsDetail,
 			})
 		}
@@ -79,12 +79,4 @@ const styles = StyleSheet.create({
 	header: {
 		backgroundColor: '#393a3f',
 	},
-	//head: {
-	//	flex: 1,
-	//	flexDirection: 'row',
-	//	alignItems: 'center',
-	//},
-	//homeHead: {
-	//	textAlign: 'center',
-	//}
 });

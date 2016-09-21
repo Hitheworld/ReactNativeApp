@@ -13,6 +13,7 @@ import {
 	Text
 } from 'react-native';
 
+
 class HeaderAndroid extends Component{
 
 	render(){
