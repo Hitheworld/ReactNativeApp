@@ -22,8 +22,8 @@ export default class ErrorView extends Component {
 		return (
 			<TouchableOpacity activeOpacity={0.9} style={styles.error} onPress={onPressErrer}>
 				<View style={styles.error}>
-					<Text>服务器异常!</Text>
-					<Text>轻触屏幕重新加载!</Text>
+					<Text style={[styles.errorText,{marginBottom:10}]}>服务器异常!</Text>
+					<Text style={[styles.errorText,{fontSize: 20,color: '#dddddd'}]}>轻触屏幕重新加载</Text>
 				</View>
 			</TouchableOpacity>
 		)
@@ -37,5 +37,8 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		backgroundColor: '#ffffff',
+	},
+	errorText: {
+
 	}
 });

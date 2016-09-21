@@ -52,6 +52,7 @@ export default class HomeNav extends Component {
 		            }}>
 		        </Header>
 		        <ScrollableTabView
+			        tabBarUnderlineColor="#f6f6f6"
 			        renderTabBar={() => <ScrollableTabBar/>}>
 			        <NewsLists tabLabel='推荐'  onPressDetails={this._pressButton.bind(this)} />
 			        <Text tabLabel='Tab2'/>

@@ -19,6 +19,8 @@ import {
 import ViewPager from 'react-native-viewpager';
 
 import News from './News';
+import ErrorView from '../../../common/ErrorView';
+import LoadingView from '../../../common/LoadingView';
 
 const REQUEST_URL = 'http://www.toutiao.com/api/article/feed/?category=__all__&utm_source=toutiao&max_behot_time=0&max_behot_time_tmp=0&as=A115978D586AAFF&cp=57D83ADA5FAF1E1';
 
@@ -73,34 +75,31 @@ export default class NewsLists extends Component {
     }
 
 	_Reload() {
+		if (!this.state.loaded) {
+			return <LoadingView />;
+		}
+
 		this._fetchListData();
 	}
 
 	render() {
-		if (!this.state.loaded) {
-			return this.renderLoadingView();
-		}
-
-		//if (!this.state.data) {
-		//	return (
-		//		<TouchableHighlight style={styles.error} onPress={this._Reload.bind(this)}>
-		//			<Text>服务器异常!</Text>
-		//			<Text>轻触屏幕重新加载!</Text>
-		//		</TouchableHighlight>
-		//	);
-		//}
-
 		let onPress = this.props.onPressDetails;
 
+		if (!this.state.loaded) {
+			return <LoadingView />;
+		}
+
 		return (
-			<ListView dataSource={this.state.dataSource}
-		        style={styles.container}
-		        renderRow={(rowData) =>
+			<View style={styles.container}>
+				{((this.state.dataSource==null)? true:false) ?
+				<ListView dataSource={this.state.dataSource}
+				          style={styles.container}
+				          renderRow={(rowData) =>
 		             <View style={styles.listContainer}>
 						 <News datadb={rowData}   onPress={onPress} />
 					 </View>
 		        }
-                renderHeader={()=>{
+				          renderHeader={()=>{
                     return(
                     <View>
                         <ViewPager
@@ -112,32 +111,13 @@ export default class NewsLists extends Component {
                     </View>
                     )}
                 }
-                enableEmptySections={true}>
-			</ListView >
+				          enableEmptySections={true}>
+				</ListView >
+				:
+				<ErrorView onPressErrer={this._Reload.bind(this)} />
+				}
+			</View>
 		)
-	}
-
-	renderLoadingView() {
-		if(Platform.OS === 'ios'){
-			return (
-				<View style={styles.containerLoading} >
-					<ProgressViewIOS  progressTintColor="yellow" progress={this.getProgress(0.8)} />
-				</View>
-			);
-		}else if(Platform.OS === 'android'){
-			return (
-				 <View style={styles.containerLoading} >
-					 <ActivityIndicator size="large" />
-					 <Text>努力加载中...</Text>
-				 </View>
-			);
-		}
-	}
-
-	//ios
-	getProgress(offset) {
-		var progress = this.state.progress + offset;
-		return Math.sin(progress % Math.PI) % 1;
 	}
 
 }
@@ -165,15 +145,5 @@ const styles = StyleSheet.create({
         height: (Dimensions.get('window').width)*0.3582,
         resizeMode: 'stretch'
     },
-	containerLoading: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-	},
-	error: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: '#363336',
-	}
+
 });

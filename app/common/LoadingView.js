@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import {
 	StyleSheet,
 	Platform,
-	TouchableOpacity,
-	TouchableHighlight,
-	PixelRatio,
-	Dimensions,
+	ProgressViewIOS,
+	ActivityIndicator,
 	View,
 	Image,
 	Text

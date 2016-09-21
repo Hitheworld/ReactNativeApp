@@ -15,6 +15,8 @@ import {
 } from 'react-native';
 import ViewPager from 'react-native-viewpager';
 
+import ErrorView from '../../common/ErrorView';
+import LoadingView from '../../common/LoadingView';
 import VideoView from './VideoView';
 import VideoDetail from './VideoDetail';
 
@@ -52,9 +54,6 @@ export default class VideoLists extends Component {
 
 	_pressButton() {
 		const { navigator } = this.props;
-		//为什么这里可以取得 props.navigator?请看上文:
-		//<Component {...route.params} navigator={navigator} />
-		//这里传递了navigator作为props
 		if(navigator) {
 			navigator.push({
 				name: 'VideoDetail',
@@ -63,13 +62,18 @@ export default class VideoLists extends Component {
 		}
 	}
 
+	_Reload() {
+		this._fetchListData();
+	}
+
 	render() {
 		if (!this.state.loaded) {
-			return this.renderLoadingView();
+			return <LoadingView />;
 		}
 
 		return (
 			<View style={styles.flex}>
+				{((this.state.dataSource==null)? true:false) ?
 				<ListView dataSource={this.state.dataSource}
 			         renderRow={(rowData) =>
 			              <View style={styles.listContainer}>
@@ -79,18 +83,13 @@ export default class VideoLists extends Component {
 			         style={styles.container}
 			         enableEmptySections={true}>
 				</ListView >
+				:
+				<ErrorView onPressErrer={this._Reload.bind(this)} />
+				}
 			</View>
 		)
 	}
 
-	renderLoadingView() {
-		return (
-			<View style={styles.containerLoading} >
-				<ActivityIndicator size="large" />
-			</View>
-
-		);
-	}
 
 }
 
